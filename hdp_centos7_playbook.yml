@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  user: vagrant
+  user: ansible
   become: True
   tasks:
     - name: Install NTP
@@ -54,7 +54,7 @@
       lineinfile: dest=/etc/ambari-agent/conf/ambari-agent.ini create=no state=present regexp='hostname=.*' line='hostname=master'
 
 - hosts: all
-  user: vagrant
+  user: ansible
   become: True
   tasks: 
     - name: Install Ambari server
