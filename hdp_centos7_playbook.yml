@@ -30,14 +30,14 @@
       selinux:
         state: disabled
 
-    - name: Create hostname entry to "master"
-      lineinfile: dest=/etc/hostname state=present create=yes regexp='.*' line='master'
+    - name: Create hostname entry to "master.subex.com"
+      lineinfile: dest=/etc/hostname state=present create=yes regexp='.*' line='master.subex.com'
 
     - name: Set networking yes
       lineinfile: dest=/etc/sysconfig/network create=yes state=present regexp='NETWORKING=.*' line='NETWORKING=yes'
 
-    - name: Set hostname to "master"
-      lineinfile: dest=/etc/sysconfig/network create=yes state=present regexp='HOSTNAME=.*' line='HOSTNAME=master'
+    - name: Set hostname to "master.subex.com"
+      lineinfile: dest=/etc/sysconfig/network create=yes state=present regexp='HOSTNAME=.*' line='HOSTNAME=master.subex.com'
 
     - name: Create Ambari Repo {{ hdp_ambari_repo }}
       command: wget http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.6.2.0/ambari.repo -O /etc/yum.repos.d/ambari.repo
@@ -51,7 +51,7 @@
         state: installed
 
     - name: Configure Ambari agent to register at Ambari server
-      lineinfile: dest=/etc/ambari-agent/conf/ambari-agent.ini create=no state=present regexp='hostname=.*' line='hostname=master'
+      lineinfile: dest=/etc/ambari-agent/conf/ambari-agent.ini create=no state=present regexp='hostname=.*' line='hostname=master.subex.com'
 
 - hosts: all
   user: ansible
