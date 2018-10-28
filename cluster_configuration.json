@@ -47,6 +47,6 @@
   "Blueprints" : {
     "blueprint_name" : "single-node-hdp-cluster",
     "stack_name" : "HDP",
-    "stack_version" : "2.3"
+    "stack_version" : "2.6"
   }
 }
