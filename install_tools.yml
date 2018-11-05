@@ -3,8 +3,10 @@
     user: ansible
     become: True
     tasks:
+      - name: Make Hive directory
+        shell: mkdir /hadoop && cd /hadoop
       - name: Download Hive
-        command: cd /hadooop && wget http://archive.apache.org/dist/hive/hive-3.1.1/apache-hive-3.1.1-bin.tar.gz
+        command: && wget http://archive.apache.org/dist/hive/hive-3.1.1/apache-hive-3.1.1-bin.tar.gz
       - name: Extract Hive zip file
         command: tar xzf apache-hive-3.1.1-bin.tar.gz
       - name: Rename Hive directory
