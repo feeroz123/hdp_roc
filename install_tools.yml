@@ -2,7 +2,7 @@
   - hosts: all
     user: ansible
     become: True
-	tasks:
+      tasks:
       - name: Download Hive
         command: wget http://archive.apache.org/dist/hive/hive-3.1.1/apache-hive-3.1.1-bin.tar.gz
       - name: Extract Hive zip file
