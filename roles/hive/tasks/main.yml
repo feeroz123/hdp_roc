@@ -1,0 +1,33 @@
+---
+  - hosts: all
+    user: ansible
+    become: True
+    environment:
+    tasks:
+      - name: Download Hive
+        get_url:
+          url: http://archive.apache.org/dist/hive/hive-3.1.1/apache-hive-3.1.1-bin.tar.gz
+          dest: /hadoop/apache-hive-3.1.1-bin.tar.gz
+      
+      - name: Extract Hive zip file
+        unarchive:
+          src: /hadoop/apache-hive-3.1.1-bin.tar.gz
+          dest: /hadoop
+      
+      - name: Delete existing Hive directory
+        file:
+          path: /hadoop/hive
+          state: absent
+        
+      - name: Rename new directory to hive
+        command: mv -f /hadoop/apache-hive-3.1.1-bin /hadoop/hive
+      
+      - name: Set HIVE_HOME in bash_profile
+        lineinfile: dest=/root/.bash_profile line='export HIVE_HOME=/hadoop/hive' insertafter='EOF' regexp='export HIVE_HOME=/hadoop/bin' state=present
+      
+      - name: Update PATH variable in bash_profile
+        lineinfile: dest=/root/.bash_profile line='export PATH=/hadoop/hive/bin:$PATH' insertafter='EOF' regexp='export PATH=\/hadoop\/hive\/bin:\$PATH' state=present
+      
+      - name: Source the bash_profile file
+        shell: source /root/.bash_profile
+           
