@@ -30,4 +30,14 @@
       
       - name: Source the bash_profile file
         shell: source /root/.bash_profile
-           
+                
+      - name: Create necessary HDFS directories
+        command: hdfs dfs -mkdir -p /tmp /user/hive/warehouse
+        become_user: hdfs
+      
+      - name: Grant necessary permissions on created directories
+        command: hdfs dfs -chmod g+w /tmp /user/hive/warehouse
+      
+      - name: Intialise Hive with Derby database
+        command: schematool -dbType derby -initSchemaTo 3.1.0 -verbose
+
