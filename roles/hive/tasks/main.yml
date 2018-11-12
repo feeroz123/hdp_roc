@@ -23,7 +23,7 @@
         command: mv -f /hadoop/apache-hive-3.1.1-bin /hadoop/hive
       
       - name: Set HIVE_HOME in bash_profile
-        lineinfile: dest=/root/.bash_profile line='export HIVE_HOME=/hadoop/hive' insertafter='EOF' regexp='export HIVE_HOME=/hadoop/bin' state=present
+        lineinfile: dest=/root/.bash_profile line='export HIVE_HOME=/hadoop/hive' insertafter='EOF' regexp='export HIVE_HOME=\/hadoop\/hive' state=present
       
       - name: Update PATH variable in bash_profile
         lineinfile: dest=/root/.bash_profile line='export PATH=/hadoop/hive/bin:$PATH' insertafter='EOF' regexp='export PATH=\/hadoop\/hive\/bin:\$PATH' state=present
