@@ -1,7 +1,7 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+This role is created to install and start HIVE in the installed cluster.
 
 Requirements
 ------------
