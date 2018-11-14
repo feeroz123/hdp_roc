@@ -1,0 +1,58 @@
+---
+# tasks file for spark
+- hosts: all
+  user: ansible
+  become: True
+  tasks:
+    - name: Download Scala
+      get_url:
+        url: http://www.scala-lang.org/files/archive/scala-2.13.0-M5.tgz
+        dest: /hadoop/scala-2.13.0-M5.tgz
+    
+    - name: Unarchive Scala zip file
+      unarchive:
+        src: /hadoop/scala-2.13.0-M5.tgz
+        dest: /hadoop
+    
+    - name: Delete existing Scala directory
+      file:
+        path: /hadoop/scala
+        state: absent
+
+    - name: Rename new directory to scala
+      command: mv -f /hadoop/scala-2.13.0-M5 /hadoop/scala
+
+    - name: Set SCALA_HOME in bash_profile
+      lineinfile: dest=/root/.bash_profile line='export SCALA_HOME=/hadoop/scala' insertafter='EOF' regexp='export SCALA_HOME=\/hadoop\/scala' state=present
+
+    - name: Update PATH variable in bash_profile
+      lineinfile: dest=/root/.bash_profile line='export PATH=/hadoop/scala/bin:$PATH' insertafter='EOF' regexp='export PATH=\/hadoop\/scala\/bin:\$PATH' state=present
+
+    
+    - name: Download Spark
+      get_url:
+        url: http://mirrors.fibergrid.in/apache/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz
+        dest: /hadoop/spark-2.4.0-bin-hadoop2.7
+    
+    - name: Unarchive Spark zip file
+      unarchive:
+        src: /hadoop/scala-2.4.0-bin-hadoop2.7.tgz
+        dest: /hadoop
+
+    - name: Delete existing Spark directory
+      file:
+        path: /hadoop/spark
+        state: absent
+
+    - name: Rename new directory to spark
+      command: mv -f /hadoop/spark-2.4.0-bin-hadoop2.7 /hadoop/spark
+
+    - name: Set SPARK_HOME in bash_profile
+      lineinfile: dest=/root/.bash_profile line='export SPARK_HOME=/hadoop/spark' insertafter='EOF' regexp='export SPARK_HOME=\/hadoop\/spark' state=present
+
+    - name: Set SPARK_EXAMPLES_JAR in bash_profile
+      lineinfile: dest=/root/.bash_profile line='export SPARK_EXAMPLES_JAR=/hadoop/spark/examples/jars/spark-examples_2.11-2.4.0.jar' insertafter='EOF' regexp='export SPARK_EXAMPLES_JAR=\/hadoop\/spark\/examples*' state=present
+
+    - name: Update PATH variable in bash_profile for SPARK_HOME
+      lineinfile: dest=/root/.bash_profile line='export PATH=/hadoop/spark/bin:$PATH' insertafter='EOF' regexp='export PATH=\/hadoop\/spark\/bin:\$PATH' state=present
+

@@ -2,6 +2,5 @@
 - hosts: all
   user: ansible
   become: True
-  tasks:
-    roles:
-      - role: hive
+  roles:
+    - role: hive
