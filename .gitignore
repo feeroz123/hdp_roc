@@ -1,3 +1,4 @@
 *.retry
 *log*
 metastore_db
+*.swp
