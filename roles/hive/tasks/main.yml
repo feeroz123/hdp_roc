@@ -37,6 +37,7 @@
       
       - name: Grant necessary permissions on created directories
         command: hdfs dfs -chmod g+w /tmp /user/hive/warehouse
+        become_user: hdfs
       
       - name: Intialise Hive with Derby database
         command: schematool -dbType derby -initSchemaTo 3.1.0 -verbose
