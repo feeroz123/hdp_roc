@@ -14,5 +14,5 @@ mkdir hdp_roc && cd hdp_roc
 
 #### Initialise GIT project and clone the files from repo
 git init
-git clone http://github.com/feeroz123/hdp_roc
+git clone $CODE_REPO 
 
