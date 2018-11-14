@@ -32,11 +32,11 @@
     - name: Download Spark
       get_url:
         url: http://mirrors.fibergrid.in/apache/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz
-        dest: /hadoop/spark-2.4.0-bin-hadoop2.7
+        dest: /hadoop/spark-2.4.0-bin-hadoop2.7.tgz
     
     - name: Unarchive Spark zip file
       unarchive:
-        src: /hadoop/scala-2.4.0-bin-hadoop2.7.tgz
+        src: /hadoop/spark-2.4.0-bin-hadoop2.7.tgz
         dest: /hadoop
 
     - name: Delete existing Spark directory
