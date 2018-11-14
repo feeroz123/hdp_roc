@@ -10,6 +10,9 @@
     
     - name: Start NTP
       command: service ntpd start
+    
+    - name: Add Ambari server port 8080 to Firewall
+      command: firewall-cmd --permanent --add-port 8080/tcp    
 
     - name: Stop firewalld/iptables
       command: service firewalld stop
