@@ -8,7 +8,7 @@ Steps to deploy the project:
 2. Run all the commands below as the Root user of this server/VM.
 3. Update "env_configurations.sh" file with required values. The variables exported in this script get used by the deplpoyment in further steps.
 4. Execute the following command to set the necessary environment variables: 
-      . env_configurations.sh
+      <b>. env_configurations.sh</b>
 5. Execute to perform pre-deployment installation and settings: 
       . pre_setup.sh
 6. Go to the project directory (/root/hdp_roc/hdp_roc) and run the following command to begin the installation of Ambari Server and Ambari Agent:
