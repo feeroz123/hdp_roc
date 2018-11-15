@@ -10,14 +10,14 @@ Steps to deploy the project:
 4. Execute the following command to set the necessary environment variables: 
       <b>. env_configurations.sh</b>
 5. Execute to perform pre-deployment installation and settings: 
-      . pre_setup.sh
+      <b>. pre_setup.sh</b>
 6. Go to the project directory (/root/hdp_roc/hdp_roc) and run the following command to begin the installation of Ambari Server and Ambari Agent:
-      ansible-playbook hdp_centos7_playbook.yml
+      <b>ansible-playbook hdp_centos7_playbook.yml</b>
 7. Execute the following command to create the HDP cluster by using the provided blueprint files:
-      . initiateCluster.sh
-8. Optionally, the status of initiate cluster request can be checked by executing: ./verifyCluster.sh
+      <b>. initiateCluster.sh</b>
+8. Optionally, the status of initiate cluster request can be checked by executing: <b>./verifyCluster.sh</b>
 9. Once the cluster has been initiated, the cluster services can be started as:
-      . start_cluster_services.sh
+      <b>. start_cluster_services.sh</b>
 
 
 --> Coming up - Steps to install HIVE and other tools.
