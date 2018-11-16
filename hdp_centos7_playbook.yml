@@ -32,14 +32,17 @@
     - name: Disable selinux
       selinux:
         state: disabled
+    
+    -name: Execute the .bashrc_hdp to set variables
+     command: source $HOSTNAME/.bashrc_hdp
 
-    - name: Create hostname entry to $AMBARI_SERVER_HOSTNAME 
-      lineinfile: dest=/etc/hostname state=present create=yes regexp='.*' line=$AMBARI_SERVER_HOSTNAME
+#    - name: Create hostname entry to $AMBARI_SERVER_HOSTNAME 
+#      lineinfile: dest=/etc/hostname state=present create=yes regexp='.*' line=$AMBARI_SERVER_HOSTNAME
 
     - name: Set networking yes
       lineinfile: dest=/etc/sysconfig/network create=yes state=present regexp='NETWORKING=.*' line='NETWORKING=yes'
 
-    - name: Set hostname to $AMBARI_SERVER_HOSTNAME
+    - name: Set hostname to $AMBARI_SERVER_HOSTNAME in Network
       lineinfile: dest=/etc/sysconfig/network create=yes state=present regexp='HOSTNAME=.*' line='HOSTNAME=$AMBARI_SERVER_HOSTNAME'
 
     - name: Create Ambari Repo
