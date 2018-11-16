@@ -17,7 +17,6 @@ ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -P ""
 mkdir hdp_roc && cd hdp_roc
 
 #### Initialise GIT project and clone the files from repo
-export CODE_REPO=http://github.com/feeroz123/hdp_roc
 git init
 git clone $CODE_REPO 
 
