@@ -1,0 +1,20 @@
+# .bashrc
+
+# User specific aliases and functions
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+
+export AMBARI_SERVER_HOSTNAME=$HOSTNAME
+export AMBARI_ADMIN_PASSWORD=admin
+export CODE_REPO=http://github.com/feeroz123/hdp_roc
+export CLUSTER_NAME=single-node-hdp-cluster
+export HDP_STACK_VERSION=2.6
+
