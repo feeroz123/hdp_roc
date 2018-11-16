@@ -3,7 +3,7 @@ yum update
 yum install -y wget scp curl openssl unzip tar ansible git
 
 #### Updating host details to ANSIBLE
-echo $(hostname -I) 'ansible-ssh-user=ansible ansible-ssh-pass=ansible' >> /etc/ansible/hosts
+echo $(hostname) 'ansible-ssh-user=ansible ansible-ssh-pass=ansible' >> /etc/ansible/hosts
 
 #### Create ansible local user and generate password-less ssh setup
 useradd ansible && echo ansible | passwd ansible --stdin
