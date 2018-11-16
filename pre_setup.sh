@@ -1,6 +1,6 @@
 #### Update YUM and install tools
 yum update
-yum install -y wget scp curl openssl unzip tar ansible git
+yum install -y wget scp curl openssl unzip tar ansible git java-1.8.0-openjdk
 
 #### Copy the .bashrc_hdp file to HOME directory, and Execute it
 cp .bashrc_hdp $HOME
