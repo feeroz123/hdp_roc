@@ -2,8 +2,12 @@
 yum update
 yum install -y wget scp curl openssl unzip tar ansible git
 
+#### Copy the .bashrc_hdp file to HOME directory, and Execute it
+cp .bashrc_hdp $HOME
+source $HOME/.bash
+
 #### Updating host details to ANSIBLE
-echo $(hostname) 'ansible-ssh-user=ansible ansible-ssh-pass=ansible' >> /etc/ansible/hosts
+echo $AMBARI_SERVER_HOSTNAME 'ansible-ssh-user=ansible ansible-ssh-pass=ansible' >> /etc/ansible/hosts
 
 #### Create ansible local user and generate password-less ssh setup
 useradd ansible && echo ansible | passwd ansible --stdin
