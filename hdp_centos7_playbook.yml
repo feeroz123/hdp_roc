@@ -33,8 +33,8 @@
       selinux:
         state: disabled
     
-    -name: Execute the .bashrc_hdp to set variables
-     command: source $HOSTNAME/.bashrc_hdp
+    - name: Execute the .bashrc_hdp to set variables
+      command: source $HOSTNAME/.bashrc_hdp
 
 #    - name: Create hostname entry to $AMBARI_SERVER_HOSTNAME 
 #      lineinfile: dest=/etc/hostname state=present create=yes regexp='.*' line=$AMBARI_SERVER_HOSTNAME
