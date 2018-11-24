@@ -4,7 +4,7 @@ yum install -y wget scp curl openssl unzip tar ansible git java-1.8.0-openjdk
 
 #### Copy the .bashrc_hdp file to HOME directory, and Execute it
 cp .bashrc_hdp $HOME
-source $HOME/.bash
+source $HOME/.bashrc_hdp
 
 #### Updating host details to ANSIBLE
 echo $AMBARI_SERVER_HOSTNAME 'ansible-ssh-user=ansible ansible-ssh-pass=ansible' >> /etc/ansible/hosts
