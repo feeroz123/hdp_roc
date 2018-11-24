@@ -10,51 +10,33 @@
     
     - name: Start NTP
       command: service ntpd start
-    
-    - name: Add Ambari server port 8080 to Firewall
-      command: firewall-cmd --permanent --add-port 8080/tcp    
+
+    - name: Start NTP on boot
+      command: systemctl enable ntpd
 
     - name: Stop firewalld/iptables
       command: service firewalld stop
 
-#    - name: Stop iptables6
-#     command: service ip6tables stop
-
-#    - name: If needed temporaly disable SELinux
-#     shell: echo 0 > enforce
-#    args:
-#        chdir: /selinux
-#        removes: enforce
-
-#    - name: Disable SElinux permanetly
-#      lineinfile: dest=/etc/sysconfig/selinux state=present create=no regexp='SELINUX=.*' line='SELINUX=disabled'
+    - name: Disable SElinux permanetly
+      lineinfile: dest=/etc/sysconfig/selinux state=present create=no regexp='SELINUX=.*' line='SELINUX=disabled'
     
     - name: Disable selinux
       selinux:
         state: disabled
-    
-    - name: Execute the .bashrc_hdp to set variables
-      command: source $HOSTNAME/.bashrc_hdp
-
-#    - name: Create hostname entry to $AMBARI_SERVER_HOSTNAME 
-#      lineinfile: dest=/etc/hostname state=present create=yes regexp='.*' line=$AMBARI_SERVER_HOSTNAME
 
     - name: Set networking yes
       lineinfile: dest=/etc/sysconfig/network create=yes state=present regexp='NETWORKING=.*' line='NETWORKING=yes'
 
-    - name: Set hostname to $AMBARI_SERVER_HOSTNAME in Network
-      lineinfile: dest=/etc/sysconfig/network create=yes state=present regexp='HOSTNAME=.*' line='HOSTNAME=$AMBARI_SERVER_HOSTNAME'
-
     - name: Create Ambari Repo
-      command: wget http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.6.2.0/ambari.repo -O /etc/yum.repos.d/ambari.repo
+      command: wget http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.6.2.2/ambari.repo -O /etc/yum.repos.d/ambari.repo
 
     - name: Clean YUM
       command: yum clean all
-    
+
     - name: YUM update
       command: yum -y update
 
-    - name: Install Ambari server
+    - name: Install MYSQL JAVA Connector
       yum:
         pkg: mysql-connector-java
         state: installed
@@ -66,14 +48,15 @@
 
     - name: Configure Ambari agent to register at Ambari server
       lineinfile: dest=/etc/ambari-agent/conf/ambari-agent.ini create=no state=present regexp='hostname=.*' line='hostname=$AMBARI_SERVER_HOSTNAME'
-    
+
     - name: Update Ambari Agent INI file
       command: sed -i '/credential_shell_cmd/a force_https_protocol=PROTOCOL_TLSv1_2' /etc/ambari-agent/conf/ambari-agent.ini
+
 
 - hosts: all
   user: ansible
   become: True
-  tasks:
+  tasks: 
     - name: Install Ambari server
       yum:
         pkg: ambari-server
@@ -82,14 +65,17 @@
     - name: Configure Ambari server
       command: ambari-server setup -s
 
-    - name: Sleep for 30 secs
-      command: sleep 30
-      
-    - name: Copy MySQL connector jar
+    - name: Sleep till server gets ready
+      command: sleep 20
+
+    - name: Copy MySQL connector jar to Ambari Server resources
       command: cp /usr/share/java/mysql-connector-java.jar /var/lib/ambari-server/resources/
 
     - name: Start Ambari server
-      command: ambari-server start
-    
+      command: service ambari-server start
+
+    - name: Wait for Ambari server to start
+      wait_for: host=$AMBARI_SERVER_HOSTNAME port=8080
+
     - name: Start Ambari agent
       command: ambari-agent start
