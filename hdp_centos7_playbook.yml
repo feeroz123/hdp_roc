@@ -50,6 +50,14 @@
 
     - name: Clean YUM
       command: yum clean all
+    
+    - name: YUM update
+      command: yum -y update
+
+    - name: Install Ambari server
+      yum:
+        pkg: mysql-connector-java
+        state: installed
 
     - name: Install Ambari Agent
       yum:
@@ -74,8 +82,11 @@
     - name: Configure Ambari server
       command: ambari-server setup -s
 
-    - name: Sleep for 20 secs
-      command: sleep 20
+    - name: Sleep for 30 secs
+      command: sleep 30
+      
+    - name: Copy MySQL connector jar
+      command: cp /usr/share/java/mysql-connector-java.jar /var/lib/ambari-server/resources/
 
     - name: Start Ambari server
       command: ambari-server start
