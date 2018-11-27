@@ -17,6 +17,9 @@ vi /etc/sysconfig/network	=> set HOSTNAME=$AMBARI_SERVER_HOSTNAME
 ### Update hostname entry in hosts file
 vi /etc/hosts => $(hostname -i) $AMBARI_SERVER_HOSTNAME
 
+Run command => hostname master.subex.com
+Restart Network service => service network restart
+
 #### Updating host details to ANSIBLE
 echo $AMBARI_SERVER_HOSTNAME 'ansible-ssh-user=ansible ansible-ssh-pass=ansible' >> /etc/ansible/hosts
 
@@ -24,8 +27,7 @@ echo $AMBARI_SERVER_HOSTNAME 'ansible-ssh-user=ansible ansible-ssh-pass=ansible'
 useradd ansible && echo ansible | passwd ansible --stdin
 
 ### Add ANSIBLE user to SUDO
-visudo
-ansible ALL=(ALL)  NOPASSWD:ALL
+Add ansible user to visudo => ansible ALL=(ALL)  NOPASSWD:ALL
 
 ### Set hostname in current session
 hostname $AMBARI_SERVER_HOSTNAME
