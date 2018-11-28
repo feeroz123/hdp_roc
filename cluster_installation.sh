@@ -1,7 +1,3 @@
-AMBARI_SERVER_HOSTNAME=master.subex.com
-CLUSTER_NAME=single_node_hdp_cluster
-BLUEPRINT_FILE=cluster_configuration.json
-
 echo "==============================================================================================================="
 echo "Deleting Blueprint"
 curl -s -H "X-Requested-By:ambari" -i -X DELETE -u admin:admin http://$AMBARI_SERVER_HOSTNAME:8080/api/v1/blueprints/$CLUSTER_NAME
