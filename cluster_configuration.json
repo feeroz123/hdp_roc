@@ -54,8 +54,8 @@
     }
   ],
   "Blueprints" : {
-    "blueprint_name" : $CLUSTER_NAME,
+    "blueprint_name" : "CLUSTER_NAME",
     "stack_name" : "HDP",
-    "stack_version" : $HDP_STACK_VERSION
+    "stack_version" : "HDP_STACK_VERSION"
   }
 }

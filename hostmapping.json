@@ -1,12 +1,12 @@
 {
-  "blueprint" : $CLUSTER_NAME,
-  "default_password" : $AMBARI_ADMIN_PASSWORD,
+  "blueprint" : "CLUSTER_NAME",
+  "default_password" : "AMBARI_ADMIN_PASSWORD",
   "host_groups" :[
     {
       "name" : "host_group_1",
       "hosts" : [
         {
-          "fqdn" : $AMBARI_SERVER_HOSTNAME 
+          "fqdn" : "AMBARI_SERVER_HOSTNAME"
         }
       ]
     }

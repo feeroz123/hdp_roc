@@ -40,6 +40,10 @@ Add ansible user to visudo => ansible ALL=(ALL)  NOPASSWD:ALL
 ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -P ""
 ssh-copy-id ansible@master.subex.com
 
+#### Copy the .bashrc_hdp file to HOME directory, and Execute it
+cp .bashrc_hdp $HOME
+source $HOME/.bashrc_hdp
+
 #### Create a home directory for the project
 mkdir hdp_roc && cd hdp_roc
 

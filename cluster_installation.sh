@@ -1,3 +1,11 @@
+#!/usr/bin/bash
+
+
+echo "Updating JSON files"
+perl -pi -e "s#CLUSTER_NAME#$CLUSTER_NAME#g" hostmapping.json $BLUEPRINT_FILE
+perl -pi -e "s#AMBARI_ADMIN_PASSWORD#$AMBARI_ADMIN_PASSWORD#g" hostmapping.json
+perl -pi -e "s#AMBARI_SERVER_HOSTNAME#$AMBARI_SERVER_HOSTNAME#g" hostmapping.json
+perl -pi -e "s#HDP_STACK_VERSION#$HDP_STACK_VERSION#g" $BLUEPRINT_FILE
 echo "==============================================================================================================="
 echo "Deleting Blueprint"
 curl -s -H "X-Requested-By:ambari" -i -X DELETE -u admin:$AMBARI_ADMIN_PASSWORD http://$AMBARI_SERVER_HOSTNAME:8080/api/v1/blueprints/$CLUSTER_NAME
