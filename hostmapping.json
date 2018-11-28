@@ -1,12 +1,12 @@
 {
-  "blueprint" : "single_node_hdp_cluster",
-  "default_password" : "admin",
+  "blueprint" : $CLUSTER_NAME,
+  "default_password" : $AMBARI_ADMIN_PASSWORD,
   "host_groups" :[
     {
       "name" : "host_group_1",
       "hosts" : [
         {
-          "fqdn" : "master.subex.com"
+          "fqdn" : $AMBARI_SERVER_HOSTNAME 
         }
       ]
     }
