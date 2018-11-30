@@ -23,9 +23,6 @@ hostname $AMBARI_SERVER_HOSTNAME
 ### Restart the network service to set hostname permanently
 service network restart
 
-#### Updating host details to ANSIBLE
-echo $AMBARI_SERVER_HOSTNAME 'ansible-ssh-user=ansible ansible-ssh-pass=ansible' >> /etc/ansible/hosts
-
 #### Create ansible local user and generate password-less ssh setup
 useradd ansible && echo ansible | passwd ansible --stdin
 
@@ -39,6 +36,9 @@ Add ansible user to visudo => ansible ALL=(ALL)  NOPASSWD:ALL
 # -----------------
 ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -P ""
 ssh-copy-id ansible@master.subex.com
+
+#### Updating host details to ANSIBLE
+echo $AMBARI_SERVER_HOSTNAME 'ansible-ssh-user=ansible ansible-ssh-pass=ansible' >> /etc/ansible/hosts
 
 #### Copy the .bashrc_hdp file to HOME directory, and Execute it
 cp .bashrc_hdp $HOME

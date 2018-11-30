@@ -4,6 +4,11 @@
   user: ansible
   become: True
   tasks:
+    - name: Create hadoop directory
+      file:
+        path: /hadoop
+        state: directory
+
     - name: Download Scala
       get_url:
         url: http://www.scala-lang.org/files/archive/scala-2.13.0-M5.tgz

@@ -1,0 +1,92 @@
+---
+- hosts: all
+  user: ansible
+  become: True
+  tasks:
+    - name: Create hadoop directory
+      file:
+        path: /hadoop
+        state: directory 
+
+    - name: Download Presto 0.214 tar ball
+      get_url:
+        url: https://repo1.maven.org/maven2/com/facebook/presto/presto-server/0.214/presto-server-0.214.tar.gz
+        dest: /hadoop/presto-server-0.214.tar.gz
+
+    - name: Unarchive the tar ball
+      unarchive:
+        src: /hadoop/presto-server-0.214.tar.gz
+        dest: /hadoop
+
+    - name: Delete existing presto directory
+      file:
+        path: /hadoop/presto
+        state: absent
+
+    - name: Rename new directory to presto
+      command: mv -f /hadoop/presto-server-0.214 /hadoop/presto
+
+    - name: Create directories
+      command: mkdir data presto/etc presto/etc/catalog
+
+    - name: Create node.properties file
+      copy:
+        dest: /hadoop/presto/etc/node.properties
+        content:  |
+          node.environment = production
+          node.id = ffffffff-ffff-ffff-ffff-ffffffffffff
+          node.data-dir = /hadoop/data
+    
+    - name: Create jvm.config file
+      copy:
+        dest: /hadoop/presto/etc/jvm.config
+        content: |
+          -server 
+          -Xmx1G 
+          -XX:+UseG1GC 
+          -XX:G1HeapRegionSize = 32M 
+          -XX:+UseGCOverheadLimit 
+          -XX:+ExplicitGCInvokesConcurrent 
+          -XX:+HeapDumpOnOutOfMemoryError 
+          -XX:OnOutOfMemoryError = kill -9 %p 
+
+    - name: Create config.properties file
+      copy:
+        dest: /hadoop/presto/etc/config.properties
+        content: |
+          coordinator = true 
+          node-scheduler.include-coordinator = true 
+          http-server.http.port = 8080 
+          query.max-memory = 0.5GB 
+          query.max-memory-per-node = 1GB 
+          discovery-server.enabled = true 
+          discovery.uri = http://$AMBARI_SERVER_HOSTNAME:8080
+
+    - name: Create log.properties file
+      copy:
+       dest: /hadoop/presto/etc/log.properties
+       content: com.facebook.presto = INFO
+
+
+    - name: Create jmx.properties file
+      copy:
+        dest: /hadoop/presto/etc/catalog/jmx.properties
+        content: connector.name = jmx
+
+    - name: Start Presto
+      command: /hadoop/presto/bin/launcher start
+
+    - name: Run Presto server
+      command: /hadoop/presto/bin/launcher run
+
+
+
+    - name: Download Presto CLI 0.214 tar ball
+      get_url:
+        url: https://repo1.maven.org/maven2/com/facebook/presto/presto-cli/0.214/presto-cli-0.214-executable.jar
+        dest: /hadoop/presto-cli-0.214-executable.jar
+  
+    - name: Delete existing Presto CLI directory
+      file:
+        path: /hadoop/presto_cli
+        state: absent 
