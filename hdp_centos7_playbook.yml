@@ -47,7 +47,7 @@
         state: installed
 
     - name: Configure Ambari agent to register at Ambari server
-      lineinfile: dest=/etc/ambari-agent/conf/ambari-agent.ini create=no state=present regexp='hostname=.*' line='hostname=$AMBARI_SERVER_HOSTNAME'
+      lineinfile: dest=/etc/ambari-agent/conf/ambari-agent.ini create=no state=present regexp='hostname=.*' line='hostname={{lookup('env','AMBARI_SERVER_HOSTNAME')}}'
 
     - name: Update Ambari Agent INI file
       command: sed -i '/credential_shell_cmd/a force_https_protocol=PROTOCOL_TLSv1_2' /etc/ambari-agent/conf/ambari-agent.ini

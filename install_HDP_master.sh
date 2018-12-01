@@ -8,8 +8,8 @@ echo "==========================================================================
 if [ $cleanup == 'with-cleanup' ] 
 then
 	echo "Starting Cleanup at `date`"
-	#{ time cat response.txt  | bash cleanup.sh ;} 2>&1
-	{ time bash cleanup.sh ;} 2>&1
+	{ time cat response.txt  | sudo bash cleanup.sh ;} 2>&1
+	#{ time bash cleanup.sh ;} 2>&1
 	ret=$?
 	if [ $ret == 0 ] 
 	then
