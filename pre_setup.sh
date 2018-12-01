@@ -4,9 +4,8 @@
 yum update
 yum install -y wget scp curl openssl unzip tar ansible git
 
-#### Copy the .bashrc_hdp file to HOME directory, and Execute it
-cp .bashrc_hdp $HOME
-source $HOME/.bashrc_hdp
+#### Set hostname env variable temporarily. Should be a FQDN
+export AMBARI_SERVER_HOSTNAME=master.subex.com
 
 ### Set hostname 
 echo $AMBARI_SERVER_HOSTNAME > /etc/hostname
