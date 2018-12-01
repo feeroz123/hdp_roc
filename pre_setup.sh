@@ -37,7 +37,7 @@ ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -P ""
 ssh-copy-id ansible@master.subex.com
 
 #### Updating host details to ANSIBLE
-echo $AMBARI_SERVER_HOSTNAME 'ansible-ssh-user=ansible ansible-ssh-pass=ansible' >> /etc/ansible/hosts
+sudo echo $AMBARI_SERVER_HOSTNAME 'ansible-ssh-user=ansible ansible-ssh-pass=ansible' >> /etc/ansible/hosts
 
 #### Copy the .bashrc_hdp file to HOME directory, and Execute it
 cp .bashrc_hdp $HOME
