@@ -28,16 +28,14 @@ useradd ansible && echo ansible | passwd ansible --stdin
 ### Add ANSIBLE user to SUDO
 Add ansible user to visudo => ansible ALL=(ALL)  NOPASSWD:ALL
 
-
+#### Updating host details to ANSIBLE
+sudo echo $AMBARI_SERVER_HOSTNAME 'ansible-ssh-user=ansible ansible-ssh-pass=ansible' >> /etc/ansible/hosts
 
 
 # As ANSIBLE user :
 # -----------------
 ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -P ""
 ssh-copy-id ansible@master.subex.com
-
-#### Updating host details to ANSIBLE
-sudo echo $AMBARI_SERVER_HOSTNAME 'ansible-ssh-user=ansible ansible-ssh-pass=ansible' >> /etc/ansible/hosts
 
 ### Set Cod Repo env variable
 export CODE_REPO=http://github.com/feeroz123/hdp_roc
