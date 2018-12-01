@@ -75,7 +75,7 @@
       command: service ambari-server start
 
     - name: Wait for Ambari server to start
-      wait_for: host=$AMBARI_SERVER_HOSTNAME port=8080
+      wait_for: host={{lookup('env','AMBARI_SERVER_HOSTNAME')}} port=8080
 
     - name: Start Ambari agent
       command: ambari-agent start
