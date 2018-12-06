@@ -35,19 +35,40 @@
           "name" : "MAPREDUCE2_CLIENT"
         },
         {
+          "name" : "WEBHCAT_SERVER"
+        },
+        {
           "name" : "ZOOKEEPER_SERVER"
         },
         {
           "name" : "ZOOKEEPER_CLIENT"
+        },
+	{
+          "name" : "HIVE_SERVER"
+        },
+	{
+          "name" : "HIVE_METASTORE"
+        },
+	{
+          "name" : "KAFKA_BROKER"
+        },
+	{
+          "name" : "SPARK_CLIENT"
+        },
+	{
+          "name" : "MYSQL_SERVER"
+        },
+	{
+          "name" : "SPARK_JOBHISTORYSERVER"
+        },
+	{
+          "name" : "HIVE_CLIENT"
         },
         {
           "name" : "RANGER_ADMIN"
         },
         {
           "name" : "RANGER_USERSYNC"
-        },
-        {
-          "name" : "RANGER_KMS_SERVER"
         }
       ],
       "cardinality" : "1"
