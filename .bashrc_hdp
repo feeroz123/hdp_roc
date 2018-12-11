@@ -20,4 +20,4 @@ export HDP_STACK_VERSION=2.6
 export BLUEPRINT_FILE=cluster_configuration.json
 export JAVA_HOME=/usr/jdk64/jdk1.8.0_112
 export PATH=$PATH:$JAVA_HOME/bin
-
+export MYSQL_ROOT_PASSWD=root123

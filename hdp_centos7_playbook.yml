@@ -69,7 +69,17 @@
       command: sleep 20
 
     - name: Copy MySQL connector jar to Ambari Server resources
-      command: cp /usr/share/java/mysql-connector-java.jar /var/lib/ambari-server/resources/
+      command: ambari-server setup --jdbc-db=mysql --jdbc-driver=/usr/share/java/mysql-connector-java.jar
+
+    - name: Installing MySQL-python
+      yum:
+        pkg: MySQL-python
+        state: installed
+
+    - name: Set MYSQL root user password
+      mysql_user: name=root
+                  password={{lookup('env','MYSQL_ROOT_PASSWD')}}
+                  check_implicit_admin=yes
 
     - name: Start Ambari server
       command: service ambari-server start
