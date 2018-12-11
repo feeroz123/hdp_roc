@@ -63,12 +63,6 @@
         },
 	{
           "name" : "HIVE_CLIENT"
-        },
-        {
-          "name" : "RANGER_ADMIN"
-        },
-        {
-          "name" : "RANGER_USERSYNC"
         }
       ],
       "cardinality" : "1"
