@@ -62,6 +62,9 @@
           "name" : "SPARK_JOBHISTORYSERVER"
         },
 	{
+          "name" : "TEZ_CLIENT"
+        },
+	{
           "name" : "HIVE_CLIENT"
         }
       ],
